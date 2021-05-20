@@ -40,8 +40,7 @@ class UserTest < ActiveSupport::TestCase
 
   test "email addresses should be unique" do
     duplicate_user = @user.dup
-    duplicate_user.email = @user.email.upcase
-    @user.save #saveしてデータベースにないと、uniqueかどうかの判定ができないため。@userを保存した後では、複製されたユーザーのメールアドレスが既にデータベース内に存在するため、ユーザの作成は無効になるはず
-    assert_not duplicate_user.valid? #assert_notはfalseであれば、OK
+    @user.save
+    assert_not duplicate_user.valid?
   end
 end
